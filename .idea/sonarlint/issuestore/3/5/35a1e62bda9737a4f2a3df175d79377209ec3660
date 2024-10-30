@@ -1,0 +1,6 @@
+
+g	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8¹ËÓõ¨2
+g	java:S112>"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8»ËÓõ¨2
+[
+java:S5993"9Change the visibility of this constructor to "protected".(Ö©·åúÿÿÿÿ8ØËÓõ¨2
+e	java:S119"IRename this generic name to match the regular expression '^[A-Z][0-9]?$'.(êè®Ä8ÙËÓõ¨2
