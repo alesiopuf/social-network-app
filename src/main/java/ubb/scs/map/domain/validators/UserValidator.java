@@ -8,6 +8,6 @@ public class UserValidator implements Validator<User> {
     @Override
     public void validate(User entity) throws ValidationException {
         if (entity.getFirstName().equals(""))
-            throw new ValidationException("Utilizatorul nu este valid");
+            throw new ValidationException("User is not valid");
     }
 }

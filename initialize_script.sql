@@ -1,0 +1,19 @@
+DROP TABLE Friendships;
+DROP TABLE Users;
+
+CREATE TABLE Users(
+	id BIGINT PRIMARY KEY,
+	firstName VARCHAR(256),
+	lastName VARCHAR(256)
+);
+CREATE TABLE Friendships(
+	userId1 BIGINT,
+	userId2 BIGINT,
+	data_prieteniei TIMESTAMP,
+	FOREIGN KEY(userId1) REFERENCES Users(id) ON DELETE CASCADE,
+	FOREIGN KEY(userId2) REFERENCES Users(id) ON DELETE CASCADE,
+	PRIMARY KEY (userId1, userId2)
+);
+
+SELECT * FROM Users;
+SELECT * FROM Friendships;

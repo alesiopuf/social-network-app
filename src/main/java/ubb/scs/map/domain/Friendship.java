@@ -11,6 +11,11 @@ public class Friendship extends Entity<Tuple<Long, Long>> {
         date = LocalDateTime.now();
     }
 
+    public Friendship(Tuple<Long, Long> id, LocalDateTime date) {
+        super.setId(id);
+        this.date = date;
+    }
+
     public LocalDateTime getDate() {
         return date;
     }
