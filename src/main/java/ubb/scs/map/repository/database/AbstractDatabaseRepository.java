@@ -2,7 +2,6 @@ package ubb.scs.map.repository.database;
 
 import ubb.scs.map.domain.Entity;
 import ubb.scs.map.domain.exception.DatabaseConnectionException;
-import ubb.scs.map.domain.exception.DatabaseQueryException;
 import ubb.scs.map.domain.validators.Validator;
 import ubb.scs.map.repository.Repository;
 import ubb.scs.map.util.DatabaseConnectionUtil;
@@ -35,9 +34,9 @@ public abstract class AbstractDatabaseRepository<ID, E extends Entity<ID>> imple
             throw new IllegalArgumentException("ID must not be null");
         }
         String query = "SELECT * FROM " + getTableName() + " WHERE " + getSQLIdForEntityId(id);
-        try(PreparedStatement statement = connection.prepareStatement(query);
-            ResultSet resultSet = statement.executeQuery()) {
-            if(resultSet.next()) {
+        try (PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+            if (resultSet.next()) {
                 return Optional.of(getEntityFromResultSet(resultSet));
             }
         } catch (SQLException e) {
@@ -51,9 +50,9 @@ public abstract class AbstractDatabaseRepository<ID, E extends Entity<ID>> imple
         String query = "SELECT * FROM " + getTableName();
         List<E> entities = new ArrayList<>();
 
-        try(PreparedStatement statement = connection.prepareStatement(query);
-            ResultSet resultSet = statement.executeQuery()) {
-            while(resultSet.next()) {
+        try (PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
                 E entity = getEntityFromResultSet(resultSet);
                 entities.add(entity);
             }
@@ -70,7 +69,7 @@ public abstract class AbstractDatabaseRepository<ID, E extends Entity<ID>> imple
         }
         validator.validate(entity);
         String query = "INSERT INTO " + getTableName() + " VALUES " + getSQLValuesForEntity(entity);
-        try(PreparedStatement statement = connection.prepareStatement(query)) {
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.executeUpdate();
         } catch (SQLException e) {
             return Optional.of(entity);
@@ -85,7 +84,7 @@ public abstract class AbstractDatabaseRepository<ID, E extends Entity<ID>> imple
         }
         Optional<E> entity = findOne(id);
         String query = "DELETE FROM " + getTableName() + " WHERE " + getSQLIdForEntityId(id);
-        try(PreparedStatement statement = connection.prepareStatement(query)) {
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.executeUpdate();
         } catch (SQLException e) {
             return Optional.empty();
@@ -101,7 +100,7 @@ public abstract class AbstractDatabaseRepository<ID, E extends Entity<ID>> imple
         validator.validate(entity);
         String query = "UPDATE " + getTableName() + " SET " + getSQLValuesForEntity(entity) +
                 " WHERE " + getSQLIdForEntityId(entity.getId());
-        try(PreparedStatement statement = connection.prepareStatement(query)) {
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.executeUpdate();
         } catch (SQLException e) {
             return Optional.of(entity);
@@ -110,7 +109,10 @@ public abstract class AbstractDatabaseRepository<ID, E extends Entity<ID>> imple
     }
 
     protected abstract String getTableName();
+
     protected abstract String getSQLIdForEntityId(ID id);
+
     protected abstract String getSQLValuesForEntity(E entity);
+
     protected abstract E getEntityFromResultSet(ResultSet resultSet) throws SQLException;
 }
