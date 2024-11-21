@@ -1,12 +1,18 @@
 package ubb.scs.map.service;
 
 import ubb.scs.map.domain.Friendship;
+import ubb.scs.map.domain.Status;
 import ubb.scs.map.domain.Tuple;
 import ubb.scs.map.domain.User;
+import ubb.scs.map.domain.dto.FriendshipDTO;
 import ubb.scs.map.domain.exception.FriendshipAlreadyExistsException;
 import ubb.scs.map.domain.exception.FriendshipNotFoundException;
 import ubb.scs.map.domain.exception.UserNotFoundException;
 import ubb.scs.map.repository.Repository;
+import ubb.scs.map.util.events.ChangeEventType;
+import ubb.scs.map.util.events.UserEntityChangeEvent;
+import ubb.scs.map.util.observer.Observable;
+import ubb.scs.map.util.observer.Observer;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,10 +24,12 @@ import java.util.Stack;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-public class FriendshipService {
+public class FriendshipService implements Observable<UserEntityChangeEvent> {
 
     private final Repository<Tuple<Long, Long>, Friendship> friendshipRepository;
     private final Repository<Long, User> userRepository;
+
+    private List<Observer<UserEntityChangeEvent>> observers=new ArrayList<>();
 
     public FriendshipService(Repository<Tuple<Long, Long>, Friendship> friendshipRepository, Repository<Long, User> userRepository) {
         this.friendshipRepository = friendshipRepository;
@@ -41,6 +49,7 @@ public class FriendshipService {
         friendshipRepository.save(friendship).ifPresent(f -> {
             throw new FriendshipAlreadyExistsException(f.toString());
         });
+        notifyObservers(new UserEntityChangeEvent(ChangeEventType.ADD, friendship));
         return friendship;
     }
 
@@ -54,7 +63,40 @@ public class FriendshipService {
             throw new UserNotFoundException(userId2);
         }
         Tuple<Long, Long> id = new Tuple<>(userId1, userId2);
-        return friendshipRepository.delete(id).orElseThrow(() -> new FriendshipNotFoundException(id));
+        Friendship friendship = friendshipRepository.delete(id).orElseThrow(() -> new FriendshipNotFoundException(id));
+        notifyObservers(new UserEntityChangeEvent(ChangeEventType.DELETE, friendship));
+        return friendship;
+    }
+
+    public List<User> getFriends(Long userId) {
+        Optional<User> user = userRepository.findOne(userId);
+        if (user.isEmpty()) {
+            throw new UserNotFoundException(userId);
+        }
+        Iterable<Friendship> friendships = friendshipRepository.findAll();
+        return StreamSupport.stream(friendships.spliterator(), false)
+                .filter(friendship -> friendship.getFirst().equals(userId) || friendship.getSecond().equals(userId))
+                .map(friendship -> {
+                    Long friendId = friendship.getFirst().equals(userId) ? friendship.getSecond() : friendship.getFirst();
+                    return userRepository.findOne(friendId).orElseThrow(() -> new UserNotFoundException(friendId));
+                })
+                .toList();
+    }
+
+    public List<FriendshipDTO> getFriendRequests(Long userId) {
+        Optional<User> user = userRepository.findOne(userId);
+        if (user.isEmpty()) {
+            throw new UserNotFoundException(userId);
+        }
+        Iterable<Friendship> friendships = friendshipRepository.findAll();
+        return StreamSupport.stream(friendships.spliterator(), false)
+                .filter(friendship -> (friendship.getFirst().equals(userId) || friendship.getSecond().equals(userId)))
+                .map(friendship -> {
+                    Long friendId = friendship.getFirst().equals(userId) ? friendship.getSecond() : friendship.getFirst();
+                    User friend = userRepository.findOne(friendId).orElseThrow(() -> new UserNotFoundException(friendId));
+                    return new FriendshipDTO(friend.getUsername(), friendship.getDate().toString(), friendship.getStatus().toString());
+                })
+                .toList();
     }
 
     public int getNumberOfCommunities() {
@@ -123,5 +165,20 @@ public class FriendshipService {
                         .forEach(stack::push);
             }
         }
+    }
+
+    @Override
+    public void addObserver(Observer<UserEntityChangeEvent> e) {
+        observers.add(e);
+    }
+
+    @Override
+    public void removeObserver(Observer<UserEntityChangeEvent> e) {
+        observers.remove(e);
+    }
+
+    @Override
+    public void notifyObservers(UserEntityChangeEvent t) {
+        observers.forEach(x -> x.update(t));
     }
 }

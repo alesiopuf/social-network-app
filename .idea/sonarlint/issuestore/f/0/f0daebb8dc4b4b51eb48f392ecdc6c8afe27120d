@@ -1,6 +1,4 @@
 
 j
-java:S1192%"HDefine a constant instead of duplicating this literal " WHERE " 3 times.(«Äí·ûÿÿÿÿ8ı‰´ñ¯2
-e	java:S119"IRename this generic name to match the regular expression '^[A-Z][0-9]?$'.(Â²´Ê8‹ãéğ¯2
-r
-java:S1128"PRemove this unused import 'ubb.scs.map.domain.exception.DatabaseQueryException'.(ÒÇÓ¾ùÿÿÿÿ8ãéğ¯2
+java:S1192$"HDefine a constant instead of duplicating this literal " WHERE " 3 times.(«Äí·ûÿÿÿÿ8Û¼ì«°2
+e	java:S119"IRename this generic name to match the regular expression '^[A-Z][0-9]?$'.(Â²´Ê8õ¼ì«°2

@@ -74,3 +74,8 @@ Msrc/main/java/ubb/scs/map/repository/database/AbstractDatabaseRepository.java,
 Osrc/main/java/ubb/scs/map/repository/database/FriendshipDatabaseRepository.java,7\c\7cc097538e0653384281da0d35cf1e2c8e7a795a
 y
 Isrc/main/java/ubb/scs/map/repository/database/UserDatabaseRepository.java,f\a\fac50f7d4465e4c7a1c813fe8f6368541ede969c
+E
+initialize_script.sql,5\6\56728dc6c4d4b61fa39629a0540c0beff5f98b48
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302

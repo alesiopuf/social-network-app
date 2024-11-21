@@ -21,7 +21,7 @@ public class UserService {
     }
 
     public User addUser(Long id, String firstName, String lastName) {
-        User user = new User(firstName, lastName);
+        User user = new User(firstName, lastName, firstName+ lastName, firstName + lastName);
         user.setId(id);
         userRepository.save(user).ifPresent(u -> {
             throw new UserAlreadyExistsException(u.toString());
@@ -35,5 +35,12 @@ public class UserService {
                 .filter(f -> f.getFirst().equals(id) || f.getSecond().equals(id)).toList();
         toBeDeleted.forEach(f -> friendshipRepository.delete(f.getId()));
         return user;
+    }
+
+    public User getUserByUsername(String username) {
+        return StreamSupport.stream(userRepository.findAll().spliterator(), false)
+                .filter(u -> u.getUsername().equals(username))
+                .findFirst()
+                .orElseThrow(() -> new UserNotFoundException(username));
     }
 }

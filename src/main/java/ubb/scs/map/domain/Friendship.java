@@ -6,14 +6,18 @@ public class Friendship extends Entity<Tuple<Long, Long>> {
 
     private LocalDateTime date;
 
+    private Status status;
+
     public Friendship(Tuple<Long, Long> id) {
         super.setId(id);
         date = LocalDateTime.now();
+        status = Status.PENDING;
     }
 
-    public Friendship(Tuple<Long, Long> id, LocalDateTime date) {
+    public Friendship(Tuple<Long, Long> id, LocalDateTime date, Status status) {
         super.setId(id);
         this.date = date;
+        this.status = status;
     }
 
     public LocalDateTime getDate() {
@@ -38,6 +42,14 @@ public class Friendship extends Entity<Tuple<Long, Long>> {
 
     public void setSecond(Long second) {
         super.getId().setSecond(second);
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Override

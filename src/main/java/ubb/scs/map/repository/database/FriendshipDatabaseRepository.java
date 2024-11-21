@@ -1,6 +1,7 @@
 package ubb.scs.map.repository.database;
 
 import ubb.scs.map.domain.Friendship;
+import ubb.scs.map.domain.Status;
 import ubb.scs.map.domain.Tuple;
 import ubb.scs.map.domain.validators.Validator;
 
@@ -27,12 +28,12 @@ public class FriendshipDatabaseRepository extends AbstractDatabaseRepository<Tup
     @Override
     protected String getSQLValuesForEntity(Friendship entity) {
         return "(" + entity.getId().getFirst() + ", " + entity.getId().getSecond() + ", '" +
-                Timestamp.valueOf(entity.getDate()) + "')";
+                Timestamp.valueOf(entity.getDate()) + "', '" + entity.getStatus().toString() + "')";
     }
 
     @Override
     protected Friendship getEntityFromResultSet(ResultSet resultSet) throws SQLException {
         return new Friendship(new Tuple<>(resultSet.getLong(1), resultSet.getLong(2)),
-                resultSet.getTimestamp(3).toLocalDateTime());
+                resultSet.getTimestamp(3).toLocalDateTime(), Status.valueOf(resultSet.getString(4)));
     }
 }

@@ -19,14 +19,16 @@ public class Main {
 //        Repository<Long, User> userRepository = new InMemoryRepository<>(new UserValidator());
 //        Repository<Tuple<Long, Long>, Friendship> friendshipRepository = new InMemoryRepository<>(new FriendshipValidator());
 
-        Repository<Long, User> userRepository = new UserDatabaseRepository(new UserValidator());
-        Repository<Tuple<Long, Long>, Friendship> friendshipRepository = new FriendshipDatabaseRepository(new FriendshipValidator());
+//        Repository<Long, User> userRepository = new UserDatabaseRepository(new UserValidator());
+//        Repository<Tuple<Long, Long>, Friendship> friendshipRepository = new FriendshipDatabaseRepository(new FriendshipValidator());
+//
+//        UserService userService = new UserService(userRepository, friendshipRepository);
+//        FriendshipService friendshipService = new FriendshipService(friendshipRepository, userRepository);
+//
+//        Console console = new Console(userService, friendshipService);
+//
+//        console.run();
 
-        UserService userService = new UserService(userRepository, friendshipRepository);
-        FriendshipService friendshipService = new FriendshipService(friendshipRepository, userRepository);
-
-        Console console = new Console(userService, friendshipService);
-
-        console.run();
+        HelloApplication.main(args);
     }
 }

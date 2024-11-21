@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="499.0" prefWidth="686.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ubb.scs.map.controller.UserAccountController">
+   <children>
+      <TableView fx:id="tableView" layoutY="38.0" prefHeight="344.0" prefWidth="686.0">
+         <columns>
+            <TableColumn fx:id="tableColumnUsername" prefWidth="228.0" text="Username" />
+            <TableColumn fx:id="tableColumnFirstname" prefWidth="235.0" text="Firstname" />
+            <TableColumn fx:id="tableColumnLastname" prefWidth="222.0" text="Lastname" />
+         </columns>
+      </TableView>
+      <Label layoutX="305.0" layoutY="8.0" text="FRIENDS">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="66.0" layoutY="419.0" mnemonicParsing="false" text="Add friend" onAction="#handleAddFriend">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button layoutX="281.0" layoutY="419.0" mnemonicParsing="false" text="Remove friend" onAction="#handleRemoveFriend">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button layoutX="528.0" layoutY="419.0" mnemonicParsing="false" text="Friend requests" onAction="#handleShowFriendRequests">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
