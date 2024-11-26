@@ -68,7 +68,7 @@ public abstract class AbstractDatabaseRepository<ID, E extends Entity<ID>> imple
             throw new IllegalArgumentException("ENTITY must not be null");
         }
         validator.validate(entity);
-        String query = "INSERT INTO " + getTableName() + " VALUES " + getSQLValuesForEntity(entity);
+        String query = "INSERT INTO " + getTableName() + getColumnsForInsert() + " VALUES " + getSQLValuesForEntity(entity);
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -109,6 +109,8 @@ public abstract class AbstractDatabaseRepository<ID, E extends Entity<ID>> imple
     }
 
     protected abstract String getTableName();
+
+    protected abstract String getColumnsForInsert();
 
     protected abstract String getSQLIdForEntityId(ID id);
 

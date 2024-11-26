@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="353.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ubb.scs.map.controller.NotificationsController">
+   <children>
+      <SplitPane dividerPositions="0.8090452261306532" orientation="VERTICAL" prefHeight="400.0" prefWidth="353.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="305.0" prefWidth="310.0" styleClass="root">
+               <children>
+                  <TableView fx:id="tableViewNotification" prefHeight="319.0" prefWidth="351.0">
+                    <columns>
+                      <TableColumn fx:id="tableViewNotificationColumnFirstName" prefWidth="102.0" text="First Name" />
+                      <TableColumn fx:id="tableViewNotificationColumnLastName" prefWidth="104.0" text="Last Name" />
+                        <TableColumn fx:id="tableViewNotificationColumnStatus" prefWidth="144.0" text="Status" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="165.0" prefWidth="310.0" styleClass="root">
+               <children>
+                  <Button layoutX="77.0" layoutY="19.0" mnemonicParsing="false" onAction="#handleAcceptFriendship" text="Accept" />
+                  <Button layoutX="177.0" layoutY="19.0" mnemonicParsing="false" onAction="#handleDeleteUser" text="Delete" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

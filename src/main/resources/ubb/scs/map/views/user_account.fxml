@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="499.0" prefWidth="686.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ubb.scs.map.controller.UserAccountController">
    <children>
       <TableView fx:id="tableView" layoutY="38.0" prefHeight="344.0" prefWidth="686.0">
@@ -22,20 +21,27 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button layoutX="66.0" layoutY="419.0" mnemonicParsing="false" text="Add friend" onAction="#handleAddFriend">
+      <Button layoutX="49.0" layoutY="402.0" mnemonicParsing="false" onAction="#handleAddFriend" text="Add friend">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button layoutX="281.0" layoutY="419.0" mnemonicParsing="false" text="Remove friend" onAction="#handleRemoveFriend">
+      <Button layoutX="205.0" layoutY="402.0" mnemonicParsing="false" onAction="#handleRemoveFriend" text="Remove friend">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button layoutX="528.0" layoutY="419.0" mnemonicParsing="false" text="Friend requests" onAction="#handleShowFriendRequests">
+      <Button layoutX="393.0" layoutY="402.0" mnemonicParsing="false" onAction="#handleShowFriendRequests" text="Friend requests">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
+      <Button layoutX="613.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleLogOut" text="Log Out" />
+      <Button layoutX="576.0" layoutY="402.0" mnemonicParsing="false" onAction="#handleChat" text="Chat">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleNotifications" text="Notifications" />
    </children>
 </AnchorPane>

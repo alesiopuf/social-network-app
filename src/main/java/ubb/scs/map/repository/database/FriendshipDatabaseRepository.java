@@ -21,6 +21,11 @@ public class FriendshipDatabaseRepository extends AbstractDatabaseRepository<Tup
     }
 
     @Override
+    protected String getColumnsForInsert() {
+        return "";
+    }
+
+    @Override
     protected String getSQLIdForEntityId(Tuple<Long, Long> id) {
         return "(userId1,userId2) = (" + id.getFirst() + ", " + id.getSecond() + ")";
     }

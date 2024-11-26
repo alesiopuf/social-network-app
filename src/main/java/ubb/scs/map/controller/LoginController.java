@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import ubb.scs.map.HelloApplication;
 import ubb.scs.map.domain.User;
 import ubb.scs.map.service.FriendshipService;
+import ubb.scs.map.service.MessageService;
 import ubb.scs.map.service.UserService;
 
 public class LoginController {
@@ -21,11 +22,13 @@ public class LoginController {
     Stage stage;
     UserService userService;
     FriendshipService friendshipService;
+    MessageService messageService;
 
-    public void initWindow(Stage stage, UserService userService, FriendshipService friendshipService) {
+    public void initWindow(Stage stage, UserService userService, FriendshipService friendshipService, MessageService messageService) {
         this.stage = stage;
         this.userService = userService;
         this.friendshipService = friendshipService;
+        this.messageService = messageService;
     }
 
     @FXML
@@ -45,7 +48,7 @@ public class LoginController {
             windowStage.setScene(new Scene(userLayout));
 
             UserAccountController userAccountController = fxmlLoader.getController();
-            userAccountController.initWindow(windowStage, userService,friendshipService, user.getId());
+            userAccountController.initWindow(windowStage, userService,friendshipService, messageService, user.getId());
 
             windowStage.setTitle("Account for " + user.getUsername());
             windowStage.show();

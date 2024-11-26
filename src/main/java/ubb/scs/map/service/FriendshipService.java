@@ -76,6 +76,7 @@ public class FriendshipService implements Observable<UserEntityChangeEvent> {
         Iterable<Friendship> friendships = friendshipRepository.findAll();
         return StreamSupport.stream(friendships.spliterator(), false)
                 .filter(friendship -> friendship.getFirst().equals(userId) || friendship.getSecond().equals(userId))
+                .filter(friendship -> friendship.getStatus().equals(Status.ACCEPTED))
                 .map(friendship -> {
                     Long friendId = friendship.getFirst().equals(userId) ? friendship.getSecond() : friendship.getFirst();
                     return userRepository.findOne(friendId).orElseThrow(() -> new UserNotFoundException(friendId));
@@ -90,13 +91,27 @@ public class FriendshipService implements Observable<UserEntityChangeEvent> {
         }
         Iterable<Friendship> friendships = friendshipRepository.findAll();
         return StreamSupport.stream(friendships.spliterator(), false)
-                .filter(friendship -> (friendship.getFirst().equals(userId) || friendship.getSecond().equals(userId)))
+                .filter(friendship -> friendship.getFirst().equals(userId))
                 .map(friendship -> {
                     Long friendId = friendship.getFirst().equals(userId) ? friendship.getSecond() : friendship.getFirst();
                     User friend = userRepository.findOne(friendId).orElseThrow(() -> new UserNotFoundException(friendId));
                     return new FriendshipDTO(friend.getUsername(), friendship.getDate().toString(), friendship.getStatus().toString());
                 })
                 .toList();
+    }
+
+    public List<Friendship> getAll() {
+        return StreamSupport.stream(friendshipRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
+    }
+
+    public Friendship setStatus(Tuple<Long, Long> id, Status newStatus) {
+        Friendship friendship = friendshipRepository.findOne(id).orElseThrow(() -> new FriendshipNotFoundException(id));
+        friendship.setStatus(newStatus);
+        friendshipRepository.delete(friendship.getId());
+        friendshipRepository.save(friendship);
+        notifyObservers(new UserEntityChangeEvent(ChangeEventType.UPDATE, friendship));
+        return friendship;
     }
 
     public int getNumberOfCommunities() {

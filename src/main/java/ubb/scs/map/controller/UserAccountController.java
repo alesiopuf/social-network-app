@@ -10,10 +10,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import ubb.scs.map.HelloApplication;
 import ubb.scs.map.domain.User;
 import ubb.scs.map.service.FriendshipService;
+import ubb.scs.map.service.MessageService;
 import ubb.scs.map.service.UserService;
 import ubb.scs.map.util.events.UserEntityChangeEvent;
 import ubb.scs.map.util.observer.Observer;
@@ -36,14 +38,16 @@ public class UserAccountController implements Observer<UserEntityChangeEvent> {
     Stage stage;
     UserService userService;
     FriendshipService friendshipService;
+    MessageService messageService;
     Long userId;
     ObservableList<User> model = FXCollections.observableArrayList();
 
-    public void initWindow(Stage stage, UserService userService, FriendshipService friendshipService, Long userId) {
+    public void initWindow(Stage stage, UserService userService, FriendshipService friendshipService, MessageService messageService, Long userId) {
         this.stage = stage;
         this.userService = userService;
         this.friendshipService = friendshipService;
         friendshipService.addObserver(this);
+        this.messageService = messageService;
         this.userId = userId;
         initModel();
     }
@@ -100,6 +104,52 @@ public class UserAccountController implements Observer<UserEntityChangeEvent> {
         friendRequestsController.initWindow(windowStage, userService, friendshipService, userId);
 
         windowStage.setTitle("Add friend menu");
+        windowStage.show();
+    }
+
+    public void handleLogOut(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("views/login.fxml"));
+
+        GridPane userLayout = fxmlLoader.load();
+        stage.setScene(new Scene(userLayout));
+
+        LoginController loginController = fxmlLoader.getController();
+        loginController.initWindow(stage, userService, friendshipService, messageService);
+        stage.setTitle("Login");
+    }
+
+    public void handleChat(ActionEvent actionEvent) throws IOException {
+        User user = tableView.getSelectionModel().getSelectedItem();
+        if (user == null) {
+            MessageAlert.showErrorMessage(stage, "Please select a friend to chat with!");
+            return;
+        }
+        Long recipientId = user.getId();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("views/chat.fxml"));
+        Stage windowStage = new Stage();
+
+        AnchorPane userLayout = fxmlLoader.load();
+        windowStage.setScene(new Scene(userLayout));
+
+        ChatController chatController = fxmlLoader.getController();
+        chatController.initWindow(stage, messageService, userService, userId, recipientId);
+
+        windowStage.setTitle("Chat");
+        windowStage.show();
+    }
+
+    public void handleNotifications(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("views/notifications.fxml"));
+        Stage windowStage = new Stage();
+
+        AnchorPane userLayout = fxmlLoader.load();
+        windowStage.setScene(new Scene(userLayout));
+
+        NotificationsController notificationsController = fxmlLoader.getController();
+        notificationsController.initWindow(userService, friendshipService, userService.getUserById(userId),windowStage);
+
+        windowStage.setTitle("Notifications");
         windowStage.show();
     }
 }

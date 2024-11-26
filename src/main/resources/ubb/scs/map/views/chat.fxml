@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="655.0" prefWidth="534.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ubb.scs.map.controller.ChatController">
+   <children>
+      <ListView fx:id="chatListView" layoutY="50.0" prefHeight="474.0" prefWidth="534.0" />
+      <Label fx:id="chatLabel" layoutX="14.0" layoutY="14.0" prefHeight="34.0" prefWidth="507.0" text="Chat with: ">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="messageTextField" layoutX="41.0" layoutY="539.0" prefHeight="74.0" prefWidth="453.0" />
+      <Button layoutX="442.0" layoutY="616.0" mnemonicParsing="false" onAction="#handleSend" text="SEND" />
+   </children>
+</AnchorPane>

@@ -43,4 +43,8 @@ public class UserService {
                 .findFirst()
                 .orElseThrow(() -> new UserNotFoundException(username));
     }
+
+    public User getUserById(Long id) {
+        return userRepository.findOne(id).orElseThrow(() -> new UserNotFoundException(id));
+    }
 }
