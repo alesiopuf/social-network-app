@@ -1,4 +1,28 @@
 
-W	java:S125"<This block of commented-out lines of code should be removed.(£ˆÚ+8Õ¢Œï¯2
+W	java:S125"<This block of commented-out lines of code should be removed.(£ˆÚ+8¡’à´2
+X	java:S125"<This block of commented-out lines of code should be removed.(é¼‰ë8©’à´2
+W
+java:S1128":Remove this unused import 'ubb.scs.map.domain.Friendship'.(“­Õù8ª’à´2
+W
+java:S1128"5Remove this unused import 'ubb.scs.map.domain.Tuple'.(¸ê–úøÿÿÿÿ8º’à´2
+P
+java:S1128"4Remove this unused import 'ubb.scs.map.domain.User'.(Şáá8»’à´2
+p
+java:S1128"NRemove this unused import 'ubb.scs.map.domain.validators.FriendshipValidator'.(æÕùÿÿÿÿ8¼’à´2
+e
+java:S1128"HRemove this unused import 'ubb.scs.map.domain.validators.UserValidator'.(“¨‘˜8¼’à´2
+[
+java:S1128">Remove this unused import 'ubb.scs.map.repository.Repository'.(Áàïî8¼’à´2
+{
+java:S1128	"YRemove this unused import 'ubb.scs.map.repository.database.FriendshipDatabaseRepository'.(ñ‚¾éøÿÿÿÿ8½’à´2
+p
+java:S1128
+"SRemove this unused import 'ubb.scs.map.repository.database.UserDatabaseRepository'.(µÏ¨Ë8½’à´2
 j
-java:S1128"MRemove this unused import 'ubb.scs.map.repository.memory.InMemoryRepository'.(ß·Ù8€±·ï¯2
+java:S1128"MRemove this unused import 'ubb.scs.map.repository.memory.InMemoryRepository'.(ß·Ù8¾’à´2
+d
+java:S1128"BRemove this unused import 'ubb.scs.map.service.FriendshipService'.(ËçÁŠûÿÿÿÿ8¿’à´2
+X
+java:S1128"<Remove this unused import 'ubb.scs.map.service.UserService'.(İÂá8À’à´2
+U
+java:S1128"3Remove this unused import 'ubb.scs.map.ui.Console'.(½Ÿ‹Ïşÿÿÿÿ8Á’à´2

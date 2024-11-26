@@ -1,3 +1,5 @@
 
-r
-java:S1149r"PReplace the synchronized class "Stack" by an unsynchronized one such as "Deque".(ÛÐ¦ øÿÿÿÿ8–ƒ»í¯2
+s
+java:S1149œ"PReplace the synchronized class "Stack" by an unsynchronized one such as "Deque".(ÛÐ¦ øÿÿÿÿ8åÙáå´2
+S
+java:S1128"6Remove this unused import 'ubb.scs.map.domain.Status'.(¾›ßÆ8Œ—ýå´2
