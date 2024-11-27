@@ -1,6 +1,6 @@
 DROP TABLE Friendships;
 DROP TABLE Users;
-DROP TABLE 
+DROP TABLE Messages;
 
 CREATE TABLE Users(
 	id BIGINT PRIMARY KEY,
@@ -50,6 +50,9 @@ INSERT INTO Friendships VALUES
 (1, 6, '2023-08-22 11:50:00', 'ACCEPTED'),
 (3, 5, '2023-09-15 17:30:00', 'ACCEPTED'),
 (2, 6, '2023-10-01 19:45:00', 'ACCEPTED');
+
+INSERT INTO Messages(from_user, to_users, message, date) VALUES
+(1, '{2, 3}', 'salut', '2023-01-16 10:30:00');
 
 SELECT * FROM Users;
 SELECT * FROM Friendships;
