@@ -107,3 +107,17 @@ g
 7src/main/java/ubb/scs/map/domain/dto/FriendshipDTO.java,2\0\2038574ab49c5070c234d0b1600d6a5a63ccab21
 N
 src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
+q
+Asrc/main/java/ubb/scs/map/domain/validators/MessageValidator.java,6\d\6deed6b60e900a6369b12f7edebfe75bdefc5b5e
+x
+Hsrc/main/java/ubb/scs/map/domain/exception/UnexpectedErrorException.java,2\2\223bf6ec48aa0fda514ecb89a2a25c23d81659cf
+]
+-src/main/java/ubb/scs/map/domain/Message.java,d\b\db39b9c3c37ec2da610d2e65636dab867caec6d6
+e
+5src/main/java/ubb/scs/map/service/MessageService.java,1\e\1ec5c5dd94fb72bcc43e39d8bfca90d942381807
+|
+Lsrc/main/java/ubb/scs/map/repository/database/MessageDatabaseRepository.java,4\c\4c298d0b31b8cecf4ff1143ca827b79b89e928a6
+h
+8src/main/java/ubb/scs/map/controller/ChatController.java,7\7\77d81964c48591e4607550b18712fb74dee654bb
+q
+Asrc/main/java/ubb/scs/map/controller/NotificationsController.java,3\0\301121850e64c344b488fc254bc569a96e482ed9

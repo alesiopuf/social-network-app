@@ -63,7 +63,15 @@ public class FriendshipService implements Observable<UserEntityChangeEvent> {
             throw new UserNotFoundException(userId2);
         }
         Tuple<Long, Long> id = new Tuple<>(userId1, userId2);
-        Friendship friendship = friendshipRepository.delete(id).orElseThrow(() -> new FriendshipNotFoundException(id));
+        Friendship friendship;
+        try {
+            Tuple<Long, Long> finalId = id;
+            friendship = friendshipRepository.delete(id).orElseThrow(() -> new FriendshipNotFoundException(finalId));
+        } catch (FriendshipNotFoundException e) {
+            id = new Tuple<>(userId2, userId1);
+            Tuple<Long, Long> finalId1 = id;
+            friendship = friendshipRepository.delete(id).orElseThrow(() -> new FriendshipNotFoundException(finalId1));
+        }
         notifyObservers(new UserEntityChangeEvent(ChangeEventType.DELETE, friendship));
         return friendship;
     }
