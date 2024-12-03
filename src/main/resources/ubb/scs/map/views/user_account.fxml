@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="499.0" prefWidth="686.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ubb.scs.map.controller.UserAccountController">
    <children>
-      <TableView fx:id="tableView" layoutY="38.0" prefHeight="344.0" prefWidth="686.0">
+      <TableView fx:id="tableView" fixedCellSize="50.0" layoutY="38.0" prefHeight="344.0" prefWidth="686.0" style="-fx-font-size: 20px;">
          <columns>
             <TableColumn fx:id="tableColumnUsername" prefWidth="228.0" text="Username" />
             <TableColumn fx:id="tableColumnFirstname" prefWidth="235.0" text="Firstname" />
@@ -43,5 +43,8 @@
          </font>
       </Button>
       <Button layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleNotifications" text="Notifications" />
+      <Button fx:id="buttonPrevious" layoutX="244.0" layoutY="11.0" mnemonicParsing="false" onAction="#handlePreviousPage" text="Previous" />
+      <Button fx:id="buttonNext" layoutX="382.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleNextPage" text="Next" />
+      <Label fx:id="pageLabel" layoutX="459.0" layoutY="15.0" prefHeight="17.0" prefWidth="97.0" text="Page: " />
    </children>
 </AnchorPane>

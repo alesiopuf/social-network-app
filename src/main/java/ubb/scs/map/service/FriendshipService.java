@@ -13,6 +13,8 @@ import ubb.scs.map.util.events.ChangeEventType;
 import ubb.scs.map.util.events.UserEntityChangeEvent;
 import ubb.scs.map.util.observer.Observable;
 import ubb.scs.map.util.observer.Observer;
+import ubb.scs.map.util.paging.Page;
+import ubb.scs.map.util.paging.Pageable;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -91,6 +93,35 @@ public class FriendshipService implements Observable<UserEntityChangeEvent> {
                 })
                 .toList();
     }
+
+    public Page<User> getFriendsOnPage(Pageable pageable, Long userId) {
+        Optional<User> user = userRepository.findOne(userId);
+        if (user.isEmpty()) {
+            throw new UserNotFoundException(userId);
+        }
+
+        List<User> allFriends = StreamSupport.stream(friendshipRepository.findAll().spliterator(), false)
+                .filter(friendship -> friendship.getFirst().equals(userId) || friendship.getSecond().equals(userId))
+                .filter(friendship -> friendship.getStatus().equals(Status.ACCEPTED))
+                .map(friendship -> {
+                    Long friendId = friendship.getFirst().equals(userId) ? friendship.getSecond() : friendship.getFirst();
+                    return userRepository.findOne(friendId).orElseThrow(() -> new UserNotFoundException(friendId));
+                })
+                .toList();
+
+        int pageSize = pageable.getPageSize();
+        int pageNumber = pageable.getPageNumber();
+        int startIndex = pageSize * pageNumber;
+        int endIndex = Math.min(startIndex + pageSize, allFriends.size());
+
+        if (startIndex >= allFriends.size()) {
+            return new Page<>(List.of(), allFriends.size());
+        }
+
+        List<User> paginatedFriends = allFriends.subList(startIndex, endIndex);
+        return new Page<>(paginatedFriends, allFriends.size());
+    }
+
 
     public List<FriendshipDTO> getFriendRequests(Long userId) {
         Optional<User> user = userRepository.findOne(userId);

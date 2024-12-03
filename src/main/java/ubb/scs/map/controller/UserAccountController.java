@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -19,6 +21,8 @@ import ubb.scs.map.service.MessageService;
 import ubb.scs.map.service.UserService;
 import ubb.scs.map.util.events.UserEntityChangeEvent;
 import ubb.scs.map.util.observer.Observer;
+import ubb.scs.map.util.paging.Page;
+import ubb.scs.map.util.paging.Pageable;
 
 import java.io.IOException;
 import java.util.List;
@@ -35,6 +39,16 @@ public class UserAccountController implements Observer<UserEntityChangeEvent> {
     public TableColumn<User, String> tableColumnFirstname;
     @FXML
     public TableColumn<User, String> tableColumnLastname;
+    @FXML
+    public Label pageLabel;
+    @FXML
+    public Button buttonPrevious;
+    @FXML
+    public Button buttonNext;
+
+    private int pageSize = 5;
+    private int currentPage = 0;
+    private int totalNumberOfElements = 0;
     Stage stage;
     UserService userService;
     FriendshipService friendshipService;
@@ -60,11 +74,31 @@ public class UserAccountController implements Observer<UserEntityChangeEvent> {
         tableView.setItems(model);
     }
 
+//    private void initModel() {
+//        Iterable<User> users = friendshipService.getFriends(userId);
+//        List<User> usersList = StreamSupport.stream(users.spliterator(), false)
+//                .collect(Collectors.toList());
+//        model.setAll(usersList);
+//    }
+
     private void initModel() {
-        Iterable<User> users = friendshipService.getFriends(userId);
-        List<User> usersList = StreamSupport.stream(users.spliterator(), false)
+        Page<User> page = friendshipService.getFriendsOnPage(new Pageable(currentPage, pageSize), userId);
+        // after delete, the number of pages might decrease
+        int maxPage = (int) Math.ceil((double) page.getTotalNumberOfElements() / pageSize) - 1;
+        if (maxPage == -1) {
+            maxPage = 0;
+        }
+        if (currentPage > maxPage) {
+            currentPage = maxPage;
+            page = friendshipService.getFriendsOnPage(new Pageable(currentPage, pageSize), userId);
+        }
+        totalNumberOfElements = page.getTotalNumberOfElements();
+        buttonPrevious.setDisable(currentPage == 0);
+        buttonNext.setDisable((currentPage + 1) * pageSize >= totalNumberOfElements);
+        List<User> userList = StreamSupport.stream(page.getElementsOnPage().spliterator(), false)
                 .collect(Collectors.toList());
-        model.setAll(usersList);
+        model.setAll(userList);
+        pageLabel.setText("Page " + (currentPage + 1) + " of " + (maxPage + 1));
     }
 
     public void handleRemoveFriend(ActionEvent actionEvent) {
@@ -151,5 +185,15 @@ public class UserAccountController implements Observer<UserEntityChangeEvent> {
 
         windowStage.setTitle("Notifications");
         windowStage.show();
+    }
+
+    public void handlePreviousPage(ActionEvent actionEvent) {
+        currentPage --;
+        initModel();
+    }
+
+    public void handleNextPage(ActionEvent actionEvent) {
+        currentPage ++;
+        initModel();
     }
 }
