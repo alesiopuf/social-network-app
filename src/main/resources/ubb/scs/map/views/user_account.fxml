@@ -46,5 +46,6 @@
       <Button fx:id="buttonPrevious" layoutX="244.0" layoutY="11.0" mnemonicParsing="false" onAction="#handlePreviousPage" text="Previous" />
       <Button fx:id="buttonNext" layoutX="382.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleNextPage" text="Next" />
       <Label fx:id="pageLabel" layoutX="459.0" layoutY="15.0" prefHeight="17.0" prefWidth="97.0" text="Page: " />
+      <Button layoutX="135.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleProfilePage" text="My Profile" />
    </children>
 </AnchorPane>

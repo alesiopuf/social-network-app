@@ -196,4 +196,18 @@ public class UserAccountController implements Observer<UserEntityChangeEvent> {
         currentPage ++;
         initModel();
     }
+
+    public void handleProfilePage(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("views/profile_page.fxml"));
+        Stage windowStage = new Stage();
+
+        AnchorPane userLayout = fxmlLoader.load();
+        windowStage.setScene(new Scene(userLayout));
+
+        ProfilePageController profilePageController = fxmlLoader.getController();
+        profilePageController.initWindow(userService, friendshipService, userService.getUserById(userId),windowStage);
+
+        windowStage.setTitle("Profile Page");
+        windowStage.show();
+    }
 }

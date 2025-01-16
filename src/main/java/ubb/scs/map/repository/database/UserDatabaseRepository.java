@@ -36,7 +36,7 @@ public class UserDatabaseRepository extends AbstractDatabaseRepository<Long, Use
     @Override
     protected User getEntityFromResultSet(ResultSet resultSet) throws SQLException {
         User user = new User(resultSet.getString(2), resultSet.getString(3),
-                resultSet.getString(4), resultSet.getString(5));
+                resultSet.getString(4), resultSet.getInt(5));
         user.setId(resultSet.getLong(1));
         return user;
     }

@@ -7,7 +7,7 @@ CREATE TABLE Users(
 	firstname VARCHAR(256),
 	lastname VARCHAR(256),
 	username VARCHAR(256),
-	passwd VARCHAR(256)
+	passwd BIGINT
 );
 CREATE TABLE Friendships(
 	userId1 BIGINT,
@@ -27,27 +27,27 @@ CREATE TABLE Messages(
 );
 
 INSERT INTO Users VALUES
-(1, 'Alesio', 'Puf', 'alesiopuf', 'alesio123'),
-(2, 'Andrei', 'Popescu', 'andreipopescu', 'andrei123'),
-(3, 'Maria', 'Ionescu', 'mariaionescu', 'maria123'),
-(4, 'Ioana', 'Vasilescu', 'ioanavasilescu', 'ioana123'),
-(5, 'Alexandru', 'Petrescu', 'alexpetrescu', 'alex123'),
-(6, 'Elena', 'Radu', 'elenaradu', 'elena123'),
-(7, 'Cristian', 'Mihai', 'cristianmihai', 'cristian123'),
-(8, 'Ana', 'Dumitru', 'anadumitru', 'ana123'),
-(9, 'Vlad', 'Georgescu', 'vladgeorgescu', 'vlad123'),
-(10, 'Diana', 'Popa', 'dianapopa', 'diana123'),
-(11, 'Robert', 'Stan', 'robertstan', 'robert123'),
-(12, 'Mihai', 'Ene', 'mihaiene', 'mihai123'),
-(13, 'Raluca', 'Iliescu', 'ralucailiescu', 'raluca123'),
-(14, 'George', 'Constantin', 'georgeconstantin', 'george123'),
-(15, 'Sorina', 'Radulescu', 'sorinaradulescu', 'sorina123'),
-(16, 'Daniel', 'Marin', 'danielmarin', 'daniel123'),
-(17, 'Alina', 'Cristea', 'alinacristea', 'alina123'),
-(18, 'Florin', 'Voicu', 'florinvoicu', 'florin123'),
-(19, 'Carmen', 'Pop', 'carmenpop', 'carmen123'),
-(20, 'Adrian', 'Tanase', 'adriantanase', 'adrian123'),
-(21, 'Laura', 'Gheorghe', 'lauragheorghe', 'laura123');
+(1, 'Alesio', 'Puf', 'alesiopuf', -1443199758),
+(2, 'Andrei', 'Popescu', 'andreipopescu', 1122415250),
+(3, 'Maria', 'Ionescu', 'mariaionescu', 244940699),
+(4, 'Ioana', 'Vasilescu', 'ioanavasilescu', 921705635),
+(5, 'Alexandru', 'Petrescu', 'alexpetrescu', -917608589),
+(6, 'Elena', 'Radu', 'elenaradu', -7595552),
+(7, 'Cristian', 'Mihai', 'cristianmihai', -2006480458),
+(8, 'Ana', 'Dumitru', 'anadumitru', -1413413891),
+(9, 'Vlad', 'Georgescu', 'vladgeorgescu', 535809624),
+(10, 'Diana', 'Popa', 'dianapopa', -232466238),
+(11, 'Robert', 'Stan', 'robertstan', 68417935),
+(12, 'Mihai', 'Ene', 'mihaiene', -1538405795),
+(13, 'Raluca', 'Iliescu', 'ralucailiescu', -2127340485),
+(14, 'George', 'Constantin', 'georgeconstantin', 1536533010),
+(15, 'Sorina', 'Radulescu', 'sorinaradulescu', -313623029),
+(16, 'Daniel', 'Marin', 'danielmarin', -1159149486),
+(17, 'Alina', 'Cristea', 'alinacristea', 1725614304),
+(18, 'Florin', 'Voicu', 'florinvoicu', -1634094205),
+(19, 'Carmen', 'Pop', 'carmenpop', 17928591),
+(20, 'Adrian', 'Tanase', 'adriantanase', 153123242),
+(21, 'Laura', 'Gheorghe', 'lauragheorghe', -1403670494);
 
 INSERT INTO Friendships VALUES
 (1, 2, '2023-01-15 10:30:00', 'ACCEPTED'),

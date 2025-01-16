@@ -8,6 +8,7 @@ import ubb.scs.map.domain.exception.UserNotFoundException;
 import ubb.scs.map.repository.Repository;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.StreamSupport;
 
 public class UserService {
@@ -21,7 +22,7 @@ public class UserService {
     }
 
     public User addUser(Long id, String firstName, String lastName) {
-        User user = new User(firstName, lastName, firstName+ lastName, firstName + lastName);
+        User user = new User(firstName, lastName, firstName+ lastName, Objects.hash(firstName + lastName));
         user.setId(id);
         userRepository.save(user).ifPresent(u -> {
             throw new UserAlreadyExistsException(u.toString());

@@ -13,6 +13,8 @@ import ubb.scs.map.service.FriendshipService;
 import ubb.scs.map.service.MessageService;
 import ubb.scs.map.service.UserService;
 
+import java.util.Objects;
+
 public class LoginController {
 
     @FXML
@@ -38,7 +40,7 @@ public class LoginController {
     public void handleLogin() {
         try {
             User user = userService.getUserByUsername(textFieldUsername.getText());
-            if (!passwordField.getText().equals(user.getPassword())) {
+            if (Objects.hash(passwordField.getText()) != user.getPassword()) {
                 throw new Exception("Password is not correct!");
             }
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("views/user_account.fxml"));

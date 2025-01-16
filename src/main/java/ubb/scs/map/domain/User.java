@@ -6,9 +6,9 @@ public class User extends Entity<Long> {
     private String firstName;
     private String lastName;
     private String username;
-    private String password;
+    private Integer password;
 
-    public User(String firstName, String lastName, String username, String password) {
+    public User(String firstName, String lastName, String username, Integer password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -39,11 +39,11 @@ public class User extends Entity<Long> {
         this.username = username;
     }
 
-    public String getPassword() {
+    public Integer getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(Integer password) {
         this.password = password;
     }
 

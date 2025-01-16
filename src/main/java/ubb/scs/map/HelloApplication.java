@@ -23,6 +23,7 @@ import ubb.scs.map.service.MessageService;
 import ubb.scs.map.service.UserService;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class HelloApplication extends Application {
     UserService userService;

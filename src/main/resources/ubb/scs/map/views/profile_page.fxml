@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ubb.scs.map.controller.ProfilePageController">
+   <children>
+      <Label fx:id="usernameText" layoutX="246.0" layoutY="26.0" text="nume_utilizator">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="friendsNumberLabel" layoutX="257.0" layoutY="80.0" text="xxx">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="289.0" layoutY="80.0" text="prieteni">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="descriptionText" layoutX="106.0" layoutY="170.0" prefHeight="200.0" prefWidth="390.0" />
+      <Label layoutX="268.0" layoutY="145.0" text="descriere">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

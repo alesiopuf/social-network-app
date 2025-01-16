@@ -1,5 +1,5 @@
 
 s
-java:S1149³"PReplace the synchronized class "Stack" by an unsynchronized one such as "Deque".(ÛĞ¦ øÿÿÿÿ8¯†ô‹·2
-o
-java:S6204q"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8“ööŒ·2
+java:S1149Ò"PReplace the synchronized class "Stack" by an unsynchronized one such as "Deque".(ÛĞ¦ øÿÿÿÿ8ë€“ó¸2
+p
+java:S6204"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8‡“ó¸2
